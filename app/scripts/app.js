@@ -13,7 +13,8 @@
                 templateUrl: '/templates/landing.html'
          })
          .state('album',{
-             url: '/album',
+             url: '/album/',
+             controller: 'AlbumCtrl as albumCtrl',
              templateUrl: '/templates/album.html'
          })
          .state('collection',{
