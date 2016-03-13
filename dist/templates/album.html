@@ -9,16 +9,16 @@
              <h5 class="album-view-release-info">{{albumCtrl.albumInfo.year +  " " + albumCtrl.albumInfo.label}}</h5>
          </div>
      </section>
-     <div ng-repeat="album in albumCtrl.albumData">
+     <div ng-repeat="song in albumCtrl.albumInfo.songs">
      <table class="album-view-song-list" >
  <tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false">
             <td class="song-item-number">
-                <span ng-show="!playing && !hovered">{{$index + 1}}</span>
-                <a class="album-song-button" ng-show="!playing && hovered"><span class="ion-play"></span></a>
-                <a class="album-song-button" ng-show="playing"><span class="ion-pause"></span></a>
+                <span ng-show="!song.playing && !hovered">{{$index + 1}}</span>
+                <a class="album-song-button" ng-show="!song.playing && hovered" ng-click="albumCtrl.songPlayer.play(song)"><span class="ion-play"></span></a>
+                <a class="album-song-button" ng-show="song.playing" ng-click="albumCtrl.songPlayer.pause(song)"><span class="ion-pause"></span></a>
              </td>
-             <td class="song-item-title">{{album.title}}<td>
-             <td class="song-item-duration">{{album.duration}}</td>
+             <td class="song-item-title">{{song.title}}<td>
+             <td class="song-item-duration">{{song.duration}}</td>
          </tr>
      </table>
          </div>

@@ -31,9 +31,6 @@
              { title: 'Wrong phone number', duration: '2:15' }
          ]
      };
-        Fixtures.getAlbum = function(){
-            return albumPicasso.songs;
-        }
         Fixtures.getAlbumInfo = function(){
             return albumPicasso;
         }
