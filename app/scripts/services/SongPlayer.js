@@ -3,10 +3,10 @@
         var SongPlayer = {};
         
         /**
-        * @desc private-- currentAlbum playing
+        * @desc public-- currentAlbum playing
         * @type {object} of album info and songs
         **/
-        var currentAlbum = Fixtures.getAlbumInfo();
+        SongPlayer.currentAlbum = Fixtures.getAlbumInfo();
         
         /**
         * @desc Buzz object audio file
@@ -31,8 +31,7 @@
         **/
         var setSong = function(song) {
             if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+               stopSong(song);
             }
             currentBuzzObject = new buzz.sound(song.audioUrl, {
                 formats: ['mp3'],
@@ -48,7 +47,17 @@
         * @return {int} index of the currenly playing song
         **/
         var getSongIndex = function(song){
-            return currentAlbum.songs.indexOf(song);
+            return SongPlayer.currentAlbum.songs.indexOf(song);
+        };
+        
+        /**
+        * @function stopSong--private
+        * @desc when stopping song, stop playing audio file and record that no current song is playing
+        
+        **/
+        var stopSong = function(song){
+                currentBuzzObject.stop();
+                song.playing = null;
         };
         
         /**
@@ -96,13 +105,30 @@
             currentSongIndex--;
             
             if(currentSongIndex < 0){
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             } else {
-                var song = currentAlbum.songs[currentSongIndex];
+                var song = SongPlayer.currentAlbum.songs[currentSongIndex];
                 setSong(song);
                 playSong(song);
             }
+        };
+        
+                /**
+        * @function SongPlayer.next--public method on SongPlayer
+        * @desc get the current song playing's index and play the next song in the album when this function is called
+        *If the current song is at the end of the album, play the first song in the same album
+        **/
+        SongPlayer.next = function(){
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            
+            if(currentSongIndex > SongPlayer.currentAlbum.songs.length - 1){
+                var song = SongPlayer.currentAlbum.songs[0];
+            }else{
+                var song = SongPlayer.currentAlbum.songs[currentSongIndex];
+            }
+                setSong(song);
+                playSong(song);
         };
         
         return SongPlayer;
