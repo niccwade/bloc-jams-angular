@@ -27,7 +27,6 @@ var albumMarconi = {
          { name: 'Wrong phone number', length: '2:15'}
      ]
  };
-
  var albumWest = {
      name: '808s & Heartbreak',
      artist: 'Kanye West',
