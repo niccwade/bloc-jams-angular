@@ -79,6 +79,17 @@
         SongPlayer.currentTime = null;
         
         /**
+        * @desc Current volume for the app
+        * @type {Number}
+        **/
+        SongPlayer.volume = 50;
+        
+        SongPlayer.setVolume = function(volume){
+            currentBuzzObject.setVolume(volume);
+            SongPlayer.volume = volume;
+        };
+        
+        /**
         * @function SongPlayer.play--public method on SongPlayer
         * @desc sets and plays song if song clicked is not playing
         * if current song playing is clicked and is paused, play current song
